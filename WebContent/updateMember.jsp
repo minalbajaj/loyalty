@@ -221,7 +221,7 @@ function Show(ID){
     <tr>
       <td colspan="5" align="left" >&nbsp;</td>
     </tr>
-   <% System.out.println("hello"+Custlist2);%>
+   <% %>
 		
 			<tr>
 			<td colspan="4">
@@ -233,7 +233,7 @@ function Show(ID){
   <tr>
     <td colspan="7" style="border-top:1px solid #000000">&nbsp;</td>
     </tr>
-  <% System.out.println("hello");
+  <% 
 				             Iterator<?> it2= Custlist2.iterator(); 
 						     while(it2.hasNext()){ 
 						     Object []rowData = (Object[]) it2.next();

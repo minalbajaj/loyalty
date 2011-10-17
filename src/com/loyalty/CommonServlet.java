@@ -227,9 +227,8 @@ public class CommonServlet extends HttpServlet {
 			// FOR CUSTOMER
 			else if (request.getParameter("myname") != null && request.getParameter("myname").equals("Addcustomer")) {
 				tr = session.beginTransaction();
-				System.out.println("add");
+				
 				if (request.getParameter("member_code") != null) {
-					System.out.println("add1");
 					String member_code = request.getParameter("member_code");
 					String member_title = request.getParameter("member_title");
 					String first_name = request.getParameter("first_name");
@@ -265,7 +264,6 @@ public class CommonServlet extends HttpServlet {
 					member.setSpouseEmail(spouse_email);
 					DateFormat formatter;
 					Date date1,date2,date3,date4;
-					System.out.println("add1");
 					formatter = new SimpleDateFormat("y/M/d");
 					date1 = (Date) formatter.parse(request.getParameter("member_anniversary"));
 				    member.setAnnivDate(date1);
@@ -280,7 +278,7 @@ public class CommonServlet extends HttpServlet {
 					{  
 						member.setSpouseBdate(null);
 					}
-					System.out.println("abv");
+					
 					Set mdetails = new HashSet();
 					if(request.getParameter("frstrwfullname")!=null && request.getParameter("frstrwfullname")!=""){
 					String frstrwfullname = request.getParameter("frstrwfullname");
@@ -291,7 +289,7 @@ public class CommonServlet extends HttpServlet {
 					mdetails.add(new Memberfamily(frstrwage,frstrwrelation,frstrwgender,frstrwfullname,date4));
 					}
 				if(request.getParameter("secondrwfullname")!=null && request.getParameter("secondrwfullname")!=""){
-					System.out.println("add5");
+					
 					String secondrwfullname = request.getParameter("secondrwfullname");
 					int secondrwage = Integer.parseInt(request.getParameter("secondrwage"));
 					String secondrwrelation = request.getParameter("secondrwrelation");
@@ -300,7 +298,7 @@ public class CommonServlet extends HttpServlet {
 			    	mdetails.add(new Memberfamily(secondrwage,secondrwrelation,secondrwgender,secondrwfullname,date4));
 				}
 				if(request.getParameter("thirdrwfullname")!=null && request.getParameter("thirdrwfullname")!=""){
-					System.out.println("add5");
+					
 					String thirdrwfullname = request.getParameter("thirdrwfullname");
 					int thirdrwage = Integer.parseInt(request.getParameter("thirdrwage"));
 					String thirdrwrelation = request.getParameter("thirdrwrelation");
@@ -309,7 +307,6 @@ public class CommonServlet extends HttpServlet {
 			    	mdetails.add(new Memberfamily(thirdrwage,thirdrwrelation,thirdrwgender,thirdrwfullname,date4));
 				}
 				if(request.getParameter("forthrwfullname")!=null && request.getParameter("forthrwfullname")!=""){
-					System.out.println("add5");
 					String forthrwfullname = request.getParameter("forthrwfullname");
 					int forthrwage = Integer.parseInt(request.getParameter("forthrwage"));
 					String forthrwrelation = request.getParameter("forthrwrelation");
@@ -317,7 +314,7 @@ public class CommonServlet extends HttpServlet {
 			    	date4 = (Date) formatter.parse(request.getParameter("forthrwdate"));
 			    	mdetails.add(new Memberfamily(forthrwage,forthrwrelation,forthrwgender,forthrwfullname,date4));
 				}
-				System.out.println("out");
+
 					member.setMdetails(mdetails);
 					System.out.println("add8");
 					session.save(member);

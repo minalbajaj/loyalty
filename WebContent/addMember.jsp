@@ -32,11 +32,17 @@ function ShowNoBox(typeval){
 		document.getElementById("textbox1").style.display='inline';
 		document.getElementById("textbox2").style.display='inline';
 		document.getElementById("textbox3").style.display='inline';
-	    calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
+		document.getElementById("weddingtextbox1").style.display='inline';
+		document.getElementById("weddingtextbox2").style.display='inline';
+		document.getElementById("weddingtextbox3").style.display='inline';
+		 calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
 	}else{
 		document.getElementById("textbox1").style.display='none';
 		document.getElementById("textbox2").style.display='none';
 		document.getElementById("textbox3").style.display='none';
+		document.getElementById("weddingtextbox1").style.display='none';
+		document.getElementById("weddingtextbox2").style.display='none';
+		document.getElementById("weddingtextbox3").style.display='none';		
 		document.getElementById("spouse_birth_date").value="";
 		
 		
@@ -344,16 +350,16 @@ function Validate()
     <div align="left" style="margin-left:15px;" class="labels">Birth Date<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"><div align="left">
-       <input type="text" readonly="readonly" name="member_birthdate" id="member_birthdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
+       <input type="text" readonly="readonly" name="member_birthdate" style="width:175px" id="member_birthdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
 
   
         </div></td>
     <td>&nbsp;</td>
-    <td align="left" valign="top">
+   <td align="left" valign="top" id ="weddingtextbox1">
     <div align="left" style="margin-left:15px;" class="labels">Wedding Anniversary<span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"> 
-     <input type="text" readonly="readonly" name="member_anniversary" id="member_anniversary" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
+    <td align="center" valign="top" id ="weddingtextbox2"><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top" id ="weddingtextbox3"> 
+     <input type="text" readonly="readonly" name="member_anniversary" style="width:175px" id="member_anniversary" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
     	</td>
   </tr>
   
@@ -397,7 +403,7 @@ function Validate()
     <div align="left" style="margin-left:15px;" class="labels">Birth Date <span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top" > <div align="left">
-       <input type="text" readonly="readonly"  name="spouse_birth_date" id="spouse_birth_date" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
+       <input type="text" readonly="readonly" style="width:175px" name="spouse_birth_date" id="spouse_birth_date" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
 
   
         </div></td>
@@ -428,21 +434,21 @@ function Validate()
      <td width="19%"  style=" border-right:1px solid #000000;background:#CCCCCC;"><div align="center"><strong><span class="style1">Sex</span></strong></div></td>
   </tr>
       <tr>
-        <td style="border-top:1px solid #000000;">
+        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;"> 
           <div align="right">  
             <input type="text" name="frstrwfullname" id="frstrwfullname" style="text-align:right;margin-right:2px "  />
           </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" name="frstrwage" id="frstrwage" style="text-align:right;margin-right:2px "  />
          </div></div></td>
-       <td style="border-top:1px solid #000000;">
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" readonly="readonly"  name="frstrwdate" id="frstrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
           <input type="text" name="frstrwrelation" id="frstrwrelation" style="text-align:right;margin-right:2px "  />
          </div></div></td>
          <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
@@ -453,21 +459,21 @@ function Validate()
         </div></div></td>
       </tr>
        <tr>
-        <td style="border-top:1px solid #000000;">
+        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;"> 
           <div align="right">  
             <input type="text" name="secondrwfullname" id="secondrwfullname" style="text-align:right;margin-right:2px "  />
           </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" name="secondrwage" id="secondrwage" style="text-align:right;margin-right:2px "  />
          </div></div></td>
-       <td style="border-top:1px solid #000000;">
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" readonly="readonly"  name="secondrwdate" id="secondrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
           <input type="text" name="secondrwrelation" id="secondrwrelation" style="text-align:right;margin-right:2px "  />
          </div></div></td>
          <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
@@ -478,21 +484,21 @@ function Validate()
         </div></div></td>
       </tr>
        <tr>
-        <td style="border-top:1px solid #000000;">
+        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;"> 
           <div align="right">  
             <input type="text" name="thirdrwfullname" id="thirdrwfullname" style="text-align:right;margin-right:2px "  />
           </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" name="thirdrwage" id="thirdrwage" style="text-align:right;margin-right:2px "  />
          </div></div></td>
-       <td style="border-top:1px solid #000000;">
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" readonly="readonly"  name="thirdtrwdate" id="thirdtrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
           <input type="text" name="thirdrwrelation" id="thirdrwrelation" style="text-align:right;margin-right:2px "  />
          </div></div></td>
          <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
@@ -503,21 +509,21 @@ function Validate()
         </div></div></td>
       </tr>
         <tr>
-        <td style="border-top:1px solid #000000;">
+        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;"> 
           <div align="right">  
             <input type="text" name="forthrwfullname" id="forthrwfullname" style="text-align:right;margin-right:2px "  />
           </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" name="forthrwage" id="forthrwage" style="text-align:right;margin-right:2px "  />
          </div></div></td>
-       <td style="border-top:1px solid #000000;">
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
          <div align="right">  
            <input type="text" readonly="readonly"  name="forthrwdate" id="forthrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
           <input type="text" name="forthrwrelation" id="forthrwrelation" style="text-align:right;margin-right:2px "  />
          </div></div></td>
          <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
