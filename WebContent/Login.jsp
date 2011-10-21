@@ -37,7 +37,7 @@
 	</script>
 </head>
 <input type="hidden" name="invalid" id="invalid" value="<%= request.getAttribute("IU") %>">
-<body >
+<body style="background:url(images/back.gif) repeat;" onload="load()">
 <div align="center">
 <table border="0" cellpadding="0" cellspacing="0" width="960px" style="background-color:#FFFFFF; border:1px solid #000000;">
 	<tr >

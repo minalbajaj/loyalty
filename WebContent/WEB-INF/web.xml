@@ -15,6 +15,13 @@
 		<servlet-name>CommonServlet</servlet-name>
 		<servlet-class>com.loyalty.CommonServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>GenerateRegistration</display-name>
+		<servlet-name>GenerateRegistration</servlet-name>
+		<servlet-class>com.loyalty.GenerateRegistration</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>StartServlet</servlet-name>
 		<url-pattern>/StartServlet</url-pattern>
@@ -22,6 +29,10 @@
 	<servlet-mapping>
 		<servlet-name>CommonServlet</servlet-name>
 		<url-pattern>/CommonServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GenerateRegistration</servlet-name>
+		<url-pattern>/GenerateRegistration</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

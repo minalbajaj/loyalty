@@ -56,4 +56,15 @@
 		<property name="memberId" type="int" column="memberId"/>
 		<property name="Age" type="int" column="Age"/>
 </class>
+	<class name="com.loyalty.CardActivation" table="card">
+		<id name="cardId" type="int" column="cardId">
+			<generator class="increment" />
+		</id>
+		<property name="memberCode" type="int" column="memberId" />
+		<property name="cardType"  column="cardType" />
+		<property name="cardNo"  column="cardNo" />
+		<property name="paidAmount" type="double" column="paidAmount" />
+		<property name="discount" type="double" column="discount" />
+		<property name="cardBalance" type="double" column="cardBalance" />
+	</class>
 	</hibernate-mapping>

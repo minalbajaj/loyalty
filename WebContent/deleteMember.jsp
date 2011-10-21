@@ -91,12 +91,7 @@ function callPagination(iPageNo){
                 <table border="0" cellpadding="0" cellspacing="0">
                <tr>
               	<td valign="top">
-	              	<form name="addcustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
-	           			<input type="hidden" name="myname" value="Addcustomer"></input>
-	           			<input type="submit" name="btnaddcustomer" class="links" value="Add" style="border:none;background: none;" />
-	           			&nbsp;&nbsp;|&nbsp;
-	           		</form>
-              	</td>
+	              	              	</td>
               	<td valign="top">
               		<form name="updatecustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="Updatecustomer"></input>

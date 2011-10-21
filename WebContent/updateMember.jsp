@@ -5,6 +5,19 @@
     response.sendRedirect("Search.jsp")	 ;  
    }
 %>
+<link rel="stylesheet" type="text/css" href="css/epoch_styles.css" /> 
+	<script type="text/javascript" src="javascript/epoch_classes.js"></script> 
+
+<script type="text/javascript"> 
+	var calendar1,calendar2,calendar3;  
+	window.onload = function() 
+	{ 
+		calendar1 = new Epoch('cal1','popup',document.getElementById('member_birthdate'),false);
+		calendar2 = new Epoch('cal1','popup',document.getElementById('member_anniversary'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
+		 calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
+		}; </script> 
+
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.sql.Connection" %>
@@ -17,19 +30,35 @@ function cancelAction()
 {
 	document.location.href("Search.jsp");
 }
+<% String str="a";%>
+
 function ShowNoBox(typeval){
+	str=document.getElementById("member_status").value;
+	
+	
+
 	if(typeval=='Married'){
-		document.getElementById("textbox1").style.display='inline';
+				document.getElementById("textbox1").style.display='inline';
 		document.getElementById("textbox2").style.display='inline';
 		document.getElementById("textbox3").style.display='inline';
 	    calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
+	    document.getElementById("weddingtextbox1").style.display='inline';
+	    document.getElementById("weddingtextbox2").style.display='inline';
+		document.getElementById("weddingtextbox3").style.display='inline';
+		calendar2 = new Epoch('cal1','popup',document.getElementById('member_anniversary'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
+
 	}else{
 		document.getElementById("textbox1").style.display='none';
 		document.getElementById("textbox2").style.display='none';
-		document.getElementById("textbox3").style.display='none';
-		//document.getElementById("spouse_birth_date").value="";
+		document.getElementById("textbox3").style.display='none';		
+		document.getElementById("weddingtextbox1").style.display='none';
+		document.getElementById("weddingtextbox2").style.display='none';
+		document.getElementById("weddingtextbox3").style.display='none';	
 		
+		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
 		
+		return(str);
 	}
 } 
 function Show(ID){
@@ -60,6 +89,7 @@ function Show(ID){
 	
 	function Showinfo()
 	{
+		
 		if(document.getElementById("membercodeupd").value=="0" &&  document.getElementById("membernameupd").value=="0"){
 			alert("Please select member code.");
 			document.getElementById("membercodeupd").focus();
@@ -72,12 +102,19 @@ function Show(ID){
 	}
 </script>
 	<%
-		List<?> Custlist1=(List<?>)request.getAttribute("updatelist1");  
+		List<?> Custlist1=(List<?>)request.getAttribute("updatelist1"); 
+
 	   String strcustid=(String)request.getAttribute("strcustid");
 	   String strcustid1=(String)request.getAttribute("strcustid1");
 		List<?> Custlist2=null;
+		List<?> Custlist3=null;
 		if(request.getAttribute("updatelist2")!=null){		
 			Custlist2=(List<?>)request.getAttribute("updatelist2"); 
+		}
+		
+		if(request.getAttribute("updatelist3")!=null)
+		{
+			Custlist3=(List<?>)request.getAttribute("updatelist3");
 		}
 		
 	%>
@@ -95,11 +132,7 @@ function Show(ID){
               <td align="right"><table border="0" cellpadding="0" cellspacing="0">
               <tr>
               	<td valign="top">
-	              	<form name="addcustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
-	           			<input type="hidden" name="myname" value="Addcustomer"></input>
-	           			<input type="submit" name="btnaddcustomer" class="links" value="Add" style="border:none;background: none;" />
-	           			&nbsp;&nbsp;|&nbsp;
-	           		</form>              	</td>
+	                          	</td>
               	<td valign="top">
               		<form name="updatecustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="Updatecustomer"></input>
@@ -124,15 +157,15 @@ function Show(ID){
       <td colspan="5" align="left"><table width="100%" border="0">
        
         <tr><% 
-						if(Custlist2!=null && Custlist2.size()>0 && strcustid1!=null){ 
+						if(Custlist1!=null && Custlist1.size()>0 && strcustid1!=null){ 
 					%>
-         <td width="16%" align="left" valign="top" ><div align="left" style="margin-left:10px;">
+         <td width="18%" align="left" valign="top" ><div align="left" style="margin-left:7px;">
       
 					<input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('1');" >
 					 Member Code
 	  </div></td>
 
-          <td width="22%">	<select name="membercodeupd" id="membercodeupd" style="width:182px" disabled="disabled">
+          <td width="24%" align="left">	<select name="membercodeupd" id="membercodeupd" size="2" style="width:182px" disabled="disabled">
 					 <option value ="0" >--Select Customer Code--</option>
 						<% Iterator<?> it1 = Custlist1.iterator(); 
 						Object []rowData=null;
@@ -148,11 +181,11 @@ function Show(ID){
 					
 						<% } }%> <input type="hidden" name="memberid1" id="memberid1" style="width:175px" value="<%= rowData[0]%>">
 			</select></td>
-					<%} else { %> <td width="16%" align="left" valign="top" ><div align="left" style="margin-left:15px;">
+					<%} else { %> <td width="18%" align="left" valign="top" ><div align="left" style="margin-left:7px;">
 	  <input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('1');" checked="checked">Member Code
 	  </div></td>
 
-          <td width="22%">	<select name="membercodeupd" id="membercodeupd" style="width:182px" >
+          <td width="24%" align="left">	<select name="membercodeupd" id="membercodeupd" size="2" style="width:182px" >
 					 <option value ="0" >--Select Customer Code--</option>
 						<% Iterator<?> it1 = Custlist1.iterator(); 
 						Object []rowData=null;
@@ -168,12 +201,12 @@ function Show(ID){
 				
 						<% } }%> <input type="hidden" name="memberid1" id="memberid1" style="width:175px" value="<%= rowData[0]%>">
 			</select></td><%} %>	
-          <td width="5%">&nbsp;</td><% 
-						if(Custlist2!=null && Custlist2.size()>0 && strcustid1!=null){ 
+          <td width="3%">&nbsp;</td><% 
+						if(Custlist1!=null && Custlist1.size()>0 && strcustid1!=null){ 
 					%>
-          <td width="17%">  <input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('2');" checked="checked"> Member Name
+          <td width="17%" valign="top">  <input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('2');" checked="checked"> Member Name
 	  </div></td>
-          <td width="20%">	<select name="membernameupd" id="membernameupd" style="width:182px" >
+          <td width="20%" align="right">	<select name="membernameupd" id="membernameupd" style="width:182px" size="2">
 					 <option value ="0" >--Select Customer Name--</option>
 						<% Iterator<?> it6 = Custlist1.iterator(); 
 						Object []rowData1=null;
@@ -191,9 +224,10 @@ function Show(ID){
 					%><option value="<%= rowData1[0] %>"><%= rowData1[2]+"  "+rowData1[3] %></option>
 					
 						<% } }%> <input type="hidden" name="memberid1" id="memberid1" style="width:175px" value="<%= rowData1[0]%>">
-			</select></td><%}else{ %><td width="17%"><input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('2');" > Member Name
+			</select></td><%}else{ %><td width="17%" valign="top" align="center">
+			<input type="radio" name="rdoShipmentAdd" id="rdoShipmentAdd" value="dbadd"  onclick="javascript:Show('2');" > Member Name
 	  </div></td>
-          <td width="20%">	<select name="membernameupd" id="membernameupd" style="width:182px" disabled="disabled">
+          <td width="23%" valign="top" align="right">	<select name="membernameupd" id="membernameupd" style="width:182px" disabled="disabled" size="2">
 					 <option value ="0" >--Select Customer Name--</option>
 						<% Iterator<?> it6 = Custlist1.iterator(); 
 						Object []rowData1=null;
@@ -212,9 +246,9 @@ function Show(ID){
 				
 						<% } }%>	 <input type="hidden" name="memberid1" id="memberid1" style="width:175px" value="<%= rowData1[0]%>">
 			</select></td><%} %>
-          <td width="20%"><input type="hidden" name="myname" value="Updatecustomer">
+          <td width="7%"><input type="hidden" name="myname" value="Updatecustomer">
           
-					<input type="button" name="btnGet" style="margin-left:10px; width:50px; height:24px" value="Get" onclick="return Showinfo();" class="buttons"></td>
+					<input type="button" name="btnGet" style="margin-left:10px; width:50px; height:24px" value="Get" onClick="return Showinfo();" class="buttons"></td>
         </tr>
       </table></td>
     </tr>
@@ -229,6 +263,8 @@ function Show(ID){
 					<% 
 						if(Custlist2!=null && Custlist2.size()>0 ){ 
 					%>
+							
+	
 					<table width="100%" border="0">
   <tr>
     <td colspan="7" style="border-top:1px solid #000000">&nbsp;</td>
@@ -240,7 +276,7 @@ function Show(ID){
 						 %>	
 					  <input type="hidden" name="memberid2" id="memberid2" style="width:175px" value="<%= rowData[0]%>">
   <tr>
-    <td width="13%" align="left" valign="top">
+    <td width="18%" align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Title<span style="color:#FF0000"> *</span></div>  </td>
     <td width="3%" align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td width="24%" align="left" valign="top"><div align="left">
@@ -261,11 +297,11 @@ function Show(ID){
             
           </select>
         </div></td>
-    <td width="4%">&nbsp;</td>
-    <td width="16%" align="left" valign="top">
+    <td width="3%">&nbsp;</td>
+    <td width="19%" align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Member Code<span style="color:#FF0000"> *</span></div>  </td>
     <td width="2%" align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td width="38%" align="left" valign="top"> 	<input type="text"  value="<%= rowData[2] %>" name="member_code" id="member_code" style="width:175px"></td>
+    <td width="31%" align="left" valign="top"> 	<input type="text"  value="<%= rowData[2] %>" name="member_code" id="member_code" style="width:175px"></td>
   </tr>
   <tr>
     <td colspan="7">&nbsp;</td>
@@ -371,22 +407,30 @@ function Show(ID){
     <div align="left" style="margin-left:15px;" class="labels">Marital Status<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td> <div align="left">
-          <select name="member_status" id="member_status" style="width:115px" onchange="javascript:ShowNoBox(this.value);" >
-            <option  value="<%= rowData[13] %>" > <%= rowData[13] %></option>
+          <select name="member_status" id="member_status" style="width:115px" onChange="javascript:ShowNoBox(this.value) ;" >
+           <%if(rowData[13]!=null && rowData[13]!="" ) { %>
+           <option  value="<%= rowData[13] %>" > <%= rowData[13] %></option>
            <%if(rowData[13].equals("Single")) { %>
             <option value ="Married" >Married</option>
            
              <%}else { %>
             <option value ="Single" >Single</option>
              
-             <%} %>
+           
+          
+            <%}}else { %>
+              <option value ="Single" >Single</option>
+            
+                         <%} %>
        
           </select>
         </div></td>
   </tr>
-  <tr>
+     <tr>
     <td colspan="7">&nbsp;</td>
     </tr>
+      <%if(rowData[13].equals("Married")){ %>
+    
    <tr>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Birth Date<span style="color:#FF0000"> *</span></div>  </td>
@@ -398,29 +442,55 @@ function Show(ID){
 								sst = (rowData[14].toString()).substring(0,10);
 								stt = sst.substring(8,10)+"/"+sst.substring(5,7)+"/"+sst.substring(0,4);
 					%>
-					<input type="text" value="<%= stt %>" name="member_birthdate" id="member_birthdate" size="8" style="border:0px; background-color: white;" readonly="readonly">
+					<input type="text" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> value="<%= stt %>" name="member_birthdate" id="member_birthdate"  style="width:175px"  readonly="readonly">
     
 
   
         </div></td>
     <td>&nbsp;</td>
-    <td align="left" valign="top">
+    <td align="left" valign="top" id="weddingtextbox1">
     <div align="left" style="margin-left:15px;" class="labels">Wedding Anniversary<span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"> 
+    <td align="center" valign="top" id="weddingtextbox2"><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top" id="weddingtextbox3"> 
     <% 
 					String sst1 = null,stt1=null;
-						
+						if(rowData[15]!=null){
 								sst1 = (rowData[15].toString()).substring(0,10);
 								stt1 = sst1.substring(8,10)+"/"+sst1.substring(5,7)+"/"+sst1.substring(0,4);
+						}
 					%>
-					<input type="text" value="<%= stt %>" name="member_anniversary" id="member_anniversary" size="8" style="border:0px; background-color: white;" readonly="readonly">    	</td>
+					<input type="text" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> value="<%= stt %>" name="member_anniversary" id="member_anniversary" style="width:175px" readonly="readonly">    	</td>
   </tr>
+  <%} else {%><tr>
+    <td align="left" valign="top">
+    <div align="left" style="margin-left:15px;" class="labels">Birth Date<span style="color:#FF0000"> *</span></div>  </td>
+    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top"><div align="left">
+     <% 
+					String sst = null,stt=null;
+						
+								sst = (rowData[14].toString()).substring(0,10);
+								stt = sst.substring(8,10)+"/"+sst.substring(5,7)+"/"+sst.substring(0,4);
+					%>
+					<input type="text" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> value="<%= stt %>" name="member_birthdate" id="member_birthdate"  style="width:175px"  readonly="readonly">
+    
+
   
+        </div></td>
+    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;  </td>
+    <td align="center" valign="top">&nbsp; </td>
+    <td align="left" valign="top"> 
+     &nbsp;  	
+</td>
+  </tr>
+  <%} %>
    <tr>
      <td colspan="7">&nbsp;</td>
      </tr>
-   <%if(rowData[13].equals("Married")){ %>
+      <%
+      System.out.println("hgg"+str);
+      if(rowData[13].equals("Married")  ){ %>
     <tr id="textbox1" >
      <td colspan="7" align="left" valign="top">
      
@@ -457,62 +527,22 @@ function Show(ID){
     <div align="left" style="margin-left:15px;" class="labels">Birth Date <span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top" > <div align="left">
-     <% 
-					String sst2 = null,stt2=null;
+     <%String sst2 = null,stt2=null;
+ if(rowData[19]!=null){
+					//String sst2 = null,stt2=null;
 						
 								sst2 = (rowData[19].toString()).substring(0,10);
 								stt2 = sst2.substring(8,10)+"/"+sst2.substring(5,7)+"/"+sst2.substring(0,4);
-					%>
-					<input type="text" value="<%= stt2 %>" name="spouse_birth_date" id="spouse_birth_date" size="8" style="border:0px; background-color: white;" readonly="readonly">
+					}%>
+					<input type="text" value="<%= stt2 %>" name="spouse_birth_date" id="spouse_birth_date" style="width:175px" readonly="readonly">
      
 
   
         </div></td>
   </tr>
- <%}else {%>
-    <tr id="textbox1" style="display: none;">
-     <td colspan="7" align="left" valign="top">
-     
-						<div align="left" style="height: 25px;" class="pageheading">Spouse Details :						</div></td>
-   </tr>
-   <tr>
-    <td colspan="7">&nbsp;</td>
-    </tr>
-   <tr id="textbox2" style="display: none;">
-    <td align="left" valign="top">
-    <div align="left" style="margin-left:15px;" class="labels">Spouse's First Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"><div align="left">
-        <input type="text" name="spouse_first_name" id="spouse_first_name" style="width:175px">
-        </div></td>
-    <td>&nbsp;</td>
-    <td align="left" valign="top">
-    <div align="left" style="margin-left:15px;" class="labels">Spouse's Last Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"> 	<input type="text" name="spouse_last_name" id="spouse_last_name" style="width:175px"></td>
-  </tr>
-   <tr>
-    <td colspan="7">&nbsp;</td>
-    </tr>
-   <tr id="textbox3" style="display: none;">
-    <td align="left" valign="top">
-    <div align="left" style="margin-left:15px;" class="labels">Spouse's Email <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"><div align="left">
-        <input type="text" name="spouse_email" id="spouse_email" style="width:175px">
-        </div></td>
-    <td>&nbsp;</td>
-    <td align="left" valign="top">
-    <div align="left" style="margin-left:15px;" class="labels">Birth Date <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" > <div align="left">
-       <input type="text" readonly="readonly"  name="spouse_birth_date" id="spouse_birth_date" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
-
-  
-        </div></td>
-  </tr>
- 
- <%} }%>
+ <%}%>
+  <%} %>
+    
    <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -522,6 +552,7 @@ function Show(ID){
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
+  <%  if(Custlist3!=null && Custlist3.size()>0){%>
   <tr>
      <td colspan="7" align="left" valign="top">
 		<div align="left" style="height: 25px;" class="pageheading">Family Details :	</div></td>
@@ -537,109 +568,60 @@ function Show(ID){
     <td width="23%"  style=" border-right:1px solid #000000;background:#CCCCCC;"><div align="center"><strong><span class="style1">Relationship with member</span></strong></div></td>
      <td width="19%"  style=" border-right:1px solid #000000;background:#CCCCCC;"><div align="center"><strong><span class="style1">Sex</span></strong></div></td>
   </tr>
+  
+  						<% Iterator<?> iterator = Custlist3.iterator(); 
+						Object []rowData9=null;
+						   while(iterator.hasNext()){ 
+						   rowData9 = (Object[]) iterator.next(); 
+						   %>
       <tr>
-        <td style="border-top:1px solid #000000;">
+        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;"> 
           <div align="right">  
-            <input type="text" name="frstrwfullname" id="frstrwfullname" style="text-align:right;margin-right:2px "  />
+            <input type="text" name="frstrwfullname" id="frstrwfullname" value="<%=rowData9[3] %>" "text-align:right;margin-right:2px "  />
           </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  
          <div align="right">  
-           <input type="text" name="frstrwage" id="frstrwage" style="text-align:right;margin-right:2px "  />
+           <input type="text" name="frstrwage" id="frstrwage" value="<%=rowData9[5] %>"style="text-align:right;margin-right:2px "  />
          </div></div></td>
-       <td style="border-top:1px solid #000000;">
+       
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
          <div align="right">  
-           <input type="text" readonly="readonly"  name="frstrwdate" id="frstrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
+          <% 
+					String sst3 = null,stt3=null;
+						
+								sst3 = (rowData9[4].toString()).substring(0,10);
+								stt3 = sst3.substring(8,10)+"/"+sst3.substring(5,7)+"/"+sst3.substring(0,4);
+					%>
+         
+           <input type="text" name="frstrwdate" id="frstrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> value="<%=stt3 %>" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-          <input type="text" name="frstrwrelation" id="frstrwrelation" style="text-align:right;margin-right:2px "  />
+       
+       <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+          <input type="text" name="frstrwrelation" id="frstrwrelation" value="<%=rowData9[1] %>" style="text-align:right;margin-right:2px "  />
          </div></div></td>
-         <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-         <select name="frstrwgender" id="frstrwgender" style="text-align:right;margin-right:2px ">
-          <option value ="Male" >Male</option>
-            <option value ="Female" >Female</option>
+         
+         <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
+          <select name="frstrwgender" id="frstrwgender" style="width:115px">
+           <option  value="<%= rowData9[2] %>" > <%= rowData9[2] %></option>
+           <%if(rowData9[2].equals("Male")) { %>
+           <option value ="Female" >Female</option>
+             
+             <%}else { %>
+         
+             <option value ="Male" >Male</option>
+             <%} %>
+            
           </select>
         </div></div></td>
       </tr>
-       <tr>
-        <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;"> 
-          <div align="right">  
-            <input type="text" name="secondrwfullname" id="secondrwfullname" style="text-align:right;margin-right:2px "  />
-          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" name="secondrwage" id="secondrwage" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-       <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" readonly="readonly"  name="secondrwdate" id="secondrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
-         </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-          <input type="text" name="secondrwrelation" id="secondrwrelation" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-         <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-         <select name="secondrwgender" id="secondrwgender" style="text-align:right;margin-right:2px ">
-          <option value ="Male" >Male</option>
-            <option value ="Female" >Female</option>
-          </select>
-        </div></div></td>
-      </tr>
-       <tr>
-        <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;"> 
-          <div align="right">  
-            <input type="text" name="thirdrwfullname" id="thirdrwfullname" style="text-align:right;margin-right:2px "  />
-          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" name="thirdrwage" id="thirdrwage" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-       <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" readonly="readonly"  name="thirdtrwdate" id="thirdtrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
-         </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-          <input type="text" name="thirdrwrelation" id="thirdrwrelation" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-         <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-         <select name="thirdrwgender" id="thirdrwgender" style="text-align:right;margin-right:2px ">
-          <option value ="Male" >Male</option>
-            <option value ="Female" >Female</option>
-          </select>
-        </div></div></td>
-      </tr>
-        <tr>
-        <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;"> 
-          <div align="right">  
-            <input type="text" name="forthrwfullname" id="forthrwfullname" style="text-align:right;margin-right:2px "  />
-          </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" name="forthrwage" id="forthrwage" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-       <td style="border-top:1px solid #000000;">
-         <div align="left" style="margin-left:4px;">  
-         <div align="right">  
-           <input type="text" readonly="readonly"  name="forthrwdate" id="forthrwdate" <% if(d1!=null){ %> value="<%= d1 %>" <% } %> style="text-align:right;margin-right:2px ">
-         </div></div></td>
-       <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-          <input type="text" name="forthrwrelation" id="forthrwrelation" style="text-align:right;margin-right:2px "  />
-         </div></div></td>
-         <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
-         <select name="forthrwgender" id="forthrwgender" style="text-align:right;margin-right:2px ">
-          <option value ="Male" >Male</option>
-            <option value ="Female" >Female</option>
-          </select>
-        </div></div></td>
-      </tr>
+      
+          
 </table>
 </div>    </td>
-    </tr>
+    </tr>   <%} }%>
+    
    <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -665,7 +647,7 @@ function Show(ID){
 						<div align="left"> <input type="hidden" name="hdnupdt" id="hdnupdt" value=""></input>
 				        <input type="submit" name="save" value="Update" onClick="return Validate1();" class="buttons" style="width: 80px;">
 				        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				         <a href="Search.jsp" onclick="javascript:cancelAction();"><input type="button" class="buttons" value="Cancel" style="width: 80px;">
+				         <a href="Search.jsp" onClick="javascript:cancelAction();"><input type="button" class="buttons" value="Cancel" style="width: 80px;">
 				     </a> </div></td>
 					</tr>
                     <tr>

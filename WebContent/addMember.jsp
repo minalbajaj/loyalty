@@ -1,4 +1,5 @@
 <%@ include file="includes/header.jsp"%>
+
 <% String mytype= (String) session.getAttribute("mytype");
    if(mytype.equals("U"))
    {   
@@ -12,12 +13,7 @@
 	window.onload = function() 
 	{ 
 		calendar1 = new Epoch('cal1','popup',document.getElementById('member_birthdate'),false);
-		calendar2 = new Epoch('cal1','popup',document.getElementById('member_anniversary'),false);
-		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
-		calendar3 = new Epoch('cal1','popup',document.getElementById('secondrwdate'),false);
-		calendar3 = new Epoch('cal1','popup',document.getElementById('thirdtrwdate'),false);
-		calendar3 = new Epoch('cal1','popup',document.getElementById('forthrwdate'),false);
-		
+				
  	}; </script> 
  	<%! String d1,d2; %>
 <script type="text/javascript">
@@ -33,18 +29,31 @@ function ShowNoBox(typeval){
 		document.getElementById("textbox2").style.display='inline';
 		document.getElementById("textbox3").style.display='inline';
 		document.getElementById("weddingtextbox1").style.display='inline';
-		document.getElementById("weddingtextbox2").style.display='inline';
+	    document.getElementById("weddingtextbox2").style.display='inline';
 		document.getElementById("weddingtextbox3").style.display='inline';
-		 calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
+		calendar2 = new Epoch('cal1','popup',document.getElementById('member_anniversary'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('secondrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('thirdtrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('forthrwdate'),false);
+        calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
 	}else{
 		document.getElementById("textbox1").style.display='none';
 		document.getElementById("textbox2").style.display='none';
 		document.getElementById("textbox3").style.display='none';
 		document.getElementById("weddingtextbox1").style.display='none';
 		document.getElementById("weddingtextbox2").style.display='none';
-		document.getElementById("weddingtextbox3").style.display='none';		
+		document.getElementById("weddingtextbox3").style.display='none';	
+		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('secondrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('thirdtrwdate'),false);
+		calendar3 = new Epoch('cal1','popup',document.getElementById('forthrwdate'),false);
 		document.getElementById("spouse_birth_date").value="";
-		
+		document.getElementById("member_anniversary").value="";
+		document.getElementById("frstrwdate").value="";
+		document.getElementById("secondrwdate").value="";
+		document.getElementById("thirdtrwdate").value="";
+		document.getElementById("forthrwdate").value="";
 		
 	}
 } 
@@ -126,7 +135,7 @@ function Validate()
 		document.frmaddmember.member_birthdate.focus();
 		return false;
 	}
-	if(document.frmaddmember.member_anniversary.value==""){
+	if(document.frmaddmember.member_anniversary.value=="" && document.getElementById('member_status').value=='Married'){
 		alert("Please enter member anniversary.");
 		document.frmaddmember.member_anniversary.focus();
 		return false;
@@ -154,70 +163,39 @@ function Validate()
 	
 	
 	document.frmaddmember.submit();
+	OpenPopup();
 	return true;
 }
 </script>
 
  	
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
-	<tr>
-		<td colspan="6">
-		<table width="100%" height="23" border="0" align="left"
-			cellpadding="0" cellspacing="0" style="border: 0px solid #000000;">
-			<tr>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-
-				<td colspan="3">
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-					<tr>
-						<td align="left">
-						<div align="left" style="height: 25px;" class="pageheading">Add Member						</div>						</td>
-						<td align="right">
-						<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td >
-								<form name="addcustomer" action="CommonServlet" method="post"
-									style="margin: 0px 0px 0px 0px;"><input type="hidden"
-									name="myname" value="Addcustomer"></input> <input type="submit"
-									name="btnaddcustomer" class="links" value="Add"
-									style="border: none; background: none;" /> &nbsp;&nbsp;|&nbsp;
-								</form>								</td>
-								<td >
-								<form name="updatecustomer" action="CommonServlet" method="post"
-									style="margin: 0px 0px 0px 0px;"><input type="hidden"
-									name="myname" value="Updatecustomer"></input> <input
-									type="submit" name="btnupdatecustomer" class="links"
-									value="Update" style="border: none; background: none;" />
-								&nbsp;&nbsp;|&nbsp;</form>								</td>
-								<td >
-								<form name="Deletecustomer" action="CommonServlet" method="post"
-									style="margin: 0px 0px 0px 0px;"><input type="hidden"
-									name="myname" value="Deletecustomer"></input> <input
-									type="submit" name="btndeletecustomer" class="links"
-									value="Delete" style="border: none; background: none;" /></form>								</td>
-							</tr>
-						</table>						</td>
-					</tr>
-				</table>				</td>
-			</tr>
 <form name="frmaddmember" method="post" action="CommonServlet">
-				<input type="hidden" name="myname" value="Addcustomer"></input>
-			<tr>
-				<td colspan="3" align="left">
+
+	<tr>
+		<td colspan="7" align="left">
+        <input type="hidden" name="myname" value="Addcustomer"></input>
+
+						</td>
+			</tr>
+							<tr>
+				<td colspan="7" align="left">
 				
 				<table width="100%" border="0">
   <tr>
-    <td width="17%">&nbsp;</td>
+    <td colspan="7" align="left" valign="top">&nbsp;</td>
+    </tr>
+  <tr>
+						<td align="left" colspan="7">
+						<div align="left" style="height: 25px;" class="pageheading">Registration Form :						</div>						</td></tr>
+                        <tr>
+    <td width="16%" align="left" valign="top">&nbsp;</td>
+    <td width="3%" align="center" valign="top">&nbsp;</td>
+    <td width="26%" align="left" valign="top">&nbsp;</td>
     <td width="3%">&nbsp;</td>
-    <td width="22%">&nbsp;</td>
-    <td width="5%">&nbsp;</td>
-    <td width="17%">&nbsp;</td>
-    <td width="3%">&nbsp;</td>
-    <td width="33%">&nbsp;</td>
+    <td width="19%" align="left" valign="top">&nbsp;</td>
+    <td width="4%">&nbsp;</td>
+    <td width="29%" align="left" valign="top">&nbsp;</td>
   </tr>
   <tr>
     <td align="left" valign="top">
@@ -235,9 +213,9 @@ function Validate()
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Member Code<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td> 	<input type="text" name="member_code" id="member_code" style="width:175px"></td>
+    <td align="left" valign="top"> 	<input type="text" name="member_code" id="member_code" style="width:175px"></td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
    <tr>
@@ -253,9 +231,9 @@ function Validate()
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="last_name" id="last_name" style="width:175px"></td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
-    </tr>
+  </tr>
    <tr>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Address<span style="color:#FF0000"> *</span></div>  </td>
@@ -285,7 +263,7 @@ function Validate()
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_pin" id="member_pin" style="width:175px"></td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
  <tr>
@@ -298,9 +276,9 @@ function Validate()
     <td>&nbsp;</td>
     <td align="left" valign="top"> </td>
     <td align="center" valign="top"></td>
-    <td> </td>
+    <td align="left" valign="top"> </td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
    <tr>
@@ -316,7 +294,7 @@ function Validate()
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_mobile" id="member_mobile" style="width:175px"></td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
  <tr>
@@ -334,15 +312,15 @@ function Validate()
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Marital Status<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td> <div align="left">
-          <select name="member_status" id="member_status" style="width:115px" onchange="javascript:ShowNoBox(this.value);" >
-           <option value ="0" >Select Status</option>
-          <option value ="Single" >Single</option>
-            <option value ="Married" >Married</option>
-          </select>
-        </div></td>
+    <td align="left" valign="top"> <div align="left">
+      <select name="member_status" id="member_status" style="width:115px" onChange="javascript:ShowNoBox(this.value);" >
+        <option value ="0" >Select Status</option>
+        <option value ="Single" >Single</option>
+        <option value ="Married" >Married</option>
+      </select>
+    </div></td>
   </tr>
-  <tr>
+  <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
    <tr>
@@ -354,18 +332,19 @@ function Validate()
 
   
         </div></td>
-    <td>&nbsp;</td>
-   <td align="left" valign="top" id ="weddingtextbox1">
+    <td align="left" valign="top">&nbsp;</td>
+   <td align="left" valign="top" id="weddingtextbox1">
     <div align="left" style="margin-left:15px;" class="labels">Wedding Anniversary<span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top" id ="weddingtextbox2"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" id ="weddingtextbox3"> 
+    <td align="center" valign="top" id="weddingtextbox2"><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top" id="weddingtextbox3"> 
      <input type="text" readonly="readonly" name="member_anniversary" style="width:175px" id="member_anniversary" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
     	</td>
   </tr>
   
-   <tr>
-     <td colspan="7">&nbsp;</td>
-     </tr>
+ <tr>
+    <td colspan="7">&nbsp;</td>
+    </tr>
+
    
    <tr id="textbox1" >
      <td colspan="7" align="left" valign="top">
@@ -376,19 +355,19 @@ function Validate()
     <td colspan="7">&nbsp;</td>
     </tr>
    <tr id="textbox2" >
-    <td align="left" valign="top">
+    <td align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Spouse's First Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"><div align="left">
+    <td align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top" ><div align="left">
         <input type="text" name="spouse_first_name" id="spouse_first_name" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
-    <td align="left" valign="top">
+    <td >&nbsp;</td>
+    <td align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Spouse's Last Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top"> 	<input type="text" name="spouse_last_name" id="spouse_last_name" style="width:175px"></td>
+    <td align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
+    <td align="left" valign="top" > 	<input type="text" name="spouse_last_name" id="spouse_last_name" style="width:175px"></td>
   </tr>
-   <tr>
+   <tr align="left" valign="top">
     <td colspan="7">&nbsp;</td>
     </tr>
    <tr id="textbox3" >
@@ -410,14 +389,8 @@ function Validate()
   </tr>
  
    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+    <td colspan="7">&nbsp;</td>
+    </tr>
   <tr>
      <td colspan="7" align="left" valign="top">
 		<div align="left" style="height: 25px;" class="pageheading">Family Details :	</div></td>
@@ -560,7 +533,7 @@ function Validate()
 						<td align="left" valign="top">&nbsp;</td>
 						<td align="left" colspan="5">
 						<div align="left"><input type="button" name="save"
-							value="Save" class="buttons" onclick="return Validate();"
+							value="Preview" class="buttons" onclick="return Validate();"
 							style="width: 80px;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
 							type="reset" name="set" class="buttons" style="width: 80px;" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -571,15 +544,7 @@ function Validate()
 						<td colspan="7" align="left">&nbsp;</td>
 					</tr>
 </table>			  </td>
-			</tr>
+			</tr></form>
+
 		</table>
-		</form>
-<%@ include file="includes/footer.jsp"%>
-<% 
-	String result=(String)request.getAttribute("result") ;
-	if(request.getAttribute("result")!=null){
-%>
-	<script type="text/javascript">
-	alert("Customer added successfully.");
-	</script>
-<% } %>
+		<%@ include file="includes/footer.jsp"%>

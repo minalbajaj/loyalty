@@ -4,7 +4,6 @@
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
-  
     <% String mystatus1= (String) session.getAttribute("mystatus");
     String myname1=null;
 	   if(mystatus1==null)
@@ -15,15 +14,13 @@
 	   }
 	    
 	%>
-  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Customer Loyalty Rewards Management</title>
+<title>INWISE SYSTEM</title>
 <link rel="stylesheet" type="text/css" href="sdmenu/sdmenu.css" />
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-
 
 <script type="text/javascript">
 	// <![CDATA[
@@ -36,25 +33,24 @@
 	// ]]>
 	
 </script>
-
 </head>
-<body >
+<body style="background:url(images/back.gif) repeat;">
 <div align="center">
-<table border="0" cellpadding="0" cellspacing="0" width="95%" style="background-color:#FFFFFF; border:1px solid #000000;">
+<table border="0" cellpadding="0" cellspacing="0" width="960px" style="background-color:#FFFFFF; border:1px solid #000000;">
 	<tr>
 		<td colspan="2" style="background:url(images/fadedBar.png) right repeat-y; color:#ffffff;">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td rowspan="2"><div align="left" style="margin-left:8px;font-family:Georgia;font-size: 26px; margin-top:5px;">
-            <img src="images/logo.jpg" width="200" height="75"  style="cursor:pointer;" />
+            <img src="images/logo.jpg" width="200" height="75" onClick="document.location.href='/Inwise/Dashboard';" style="cursor:pointer;" />
             </div></td>
-                <td style="color:#ffffff; font-weight: bold;"><div align="right" style="margin-right: 5px;">WELCOME  <%=myname1 %><a href="Logout.jsp" class="links" style="color: white;font-size:12px;">  (Logout)</a></div></td>
+                <td style="color:#ffffff; font-weight: bold;"><div align="right" style="margin-right: 5px;">WELCOME <%=myname1 %><a href="Logout.jsp" class="links" style="color: white;font-size:12px;">  (Logout)</a></div></td>
               </tr>
               <tr>
                 <td style=" color:#ffffff; font-weight: bold;">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="60%" align="right"><img src="images/home.png" width="24" height="24" style="cursor:pointer;"  title="Home">&nbsp;</td>
+                    <td width="60%" align="right"><img src="images/home.png" width="24" height="24" style="cursor:pointer;" onClick="document.location.href='/Inwise/Dashboard';" title="Home">&nbsp;</td>
                     <td width="6%" align="center">|</td>
                     <td width="34%" align="left">
                     	<div align="right" style="margin-right:5px;color:#ffffff;" class="labels">
@@ -95,4 +91,4 @@
 			<%@ include file="usermenu.jsp" %>
 			<% } %>
 		</td>
-		<td width="90%" height="400" valign="top" align="center">
+		<td width="85%" height="400" valign="top" align="center">

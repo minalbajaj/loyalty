@@ -265,8 +265,15 @@ public class CommonServlet extends HttpServlet {
 					DateFormat formatter;
 					Date date1,date2,date3,date4;
 					formatter = new SimpleDateFormat("y/M/d");
-					date1 = (Date) formatter.parse(request.getParameter("member_anniversary"));
-				    member.setAnnivDate(date1);
+					if(request.getParameter("member_anniversary")!=null && request.getParameter("member_anniversary")!=""){
+						date1 = (Date) formatter.parse(request.getParameter("member_anniversary"));
+						 member.setAnnivDate(date1);
+						}
+						else
+						{  
+							 member.setAnnivDate(null);
+
+						}
 					date2 = (Date) formatter.parse(request.getParameter("member_birthdate"));
 					member.setBirthDate(date2);
 				
@@ -321,7 +328,24 @@ public class CommonServlet extends HttpServlet {
 					request.setAttribute("result", "DONE");
 					tr.commit();
 				}
-				dispatcher = getServletContext().getRequestDispatcher("/addMember.jsp");
+				Query q2 = session.createQuery("select max(memberId) from Member");
+				List la = q2.list();
+				Iterator it = la.iterator();
+				Integer rowData1 = 0;
+				while (it.hasNext()) {
+					rowData1 = (Integer) it.next();
+				}
+				Query q4 = session.createQuery("Select m.memberId,m.title,m.memberCode,m.firstName,m.lastName,m.address,m.city,m.state,m.pin,m.email,m.phone,m.mobile,m.gender,m.maritalStatus,m.birthDate,m.annivDate,m.spouseFname,m.spouseLname,m.spouseEmail,m.spouseBdate from Member m where  m.memberId="+ rowData1);
+				List Custlist2 = q4.list();
+				System.out.println("sdfsewf1"+q4);
+				
+				request.setAttribute("updatelist2", Custlist2);
+				System.out.println("sdfsewf1"+Custlist2);
+			    Query q3 = session.createQuery("Select mf.mFamilyId,mf.Relation,mf.Gender,mf.Name,mf.DOB,mf.Age from Memberfamily mf where mf.memberId="+ rowData1);
+				List Custlist3 = q3.list();
+				request.setAttribute("updatelist3", Custlist3);
+
+				dispatcher = getServletContext().getRequestDispatcher("/PreviewMember.jsp");
 				dispatcher.forward(request, response);
 			} else if (request.getParameter("memberid1") != null || (request.getParameter("myname") != null && request.getParameter("myname").equals("Updatecustomer"))) {
 				System.out.println("sdfsewf");
@@ -332,19 +356,25 @@ public class CommonServlet extends HttpServlet {
 				}
 				tr = session.beginTransaction();
 				if (request.getParameter("hdnupdt") != null && request.getParameter("hdnupdt").equals("SubmitFormupdt")) {
+					System.out.println("id:"+a2);
+					
 					String member_code = request.getParameter("member_code");
+					System.out.println("id0:"+a2);
 					String member_title = request.getParameter("member_title");
 					String first_name = request.getParameter("first_name");
 					String last_name = request.getParameter("last_name");
 					String member_address = request.getParameter("member_address");
+					System.out.println("id2:"+a2);
 					String member_city = request.getParameter("member_city");
 					String member_state = request.getParameter("member_state");
 					String member_pin = request.getParameter("member_pin");
 					String member_email = request.getParameter("member_email");
+					System.out.println("id3:"+a2);
 					String member_phone = request.getParameter("member_phone");
 					String member_mobile = request.getParameter("member_mobile");
 					String member_gender = request.getParameter("member_gender");
 					String member_status = request.getParameter("member_status");
+					
 					String spouse_first_name = request.getParameter("spouse_first_name");
 					String spouse_last_name = request.getParameter("spouse_last_name");
 					String spouse_email = request.getParameter("spouse_email");
@@ -366,58 +396,70 @@ public class CommonServlet extends HttpServlet {
 					memberupdate.setSpouseLname(spouse_last_name);
 					memberupdate.setSpouseEmail(spouse_email);
 					DateFormat formatter;
-					Date date1,date2,date3,date4;
+					Date date1,date2,date3;
+					Date d4[];
+					
 					formatter = new SimpleDateFormat("y/M/d");
-				//	date1 = (Date) formatter.parse(request.getParameter("member_anniversary"));
-				//	memberupdate.setAnnivDate(date1);
-				//	date2 = (Date) formatter.parse(request.getParameter("member_birthdate"));
-				//	memberupdate.setBirthDate(date2);
-				//	if(request.getParameter("spouse_birth_date")!=null && request.getParameter("spouse_birth_date")!=""){
-				//	date3 = (Date) formatter.parse(request.getParameter("spouse_birth_date"));
-				//	memberupdate.setSpouseBdate(date3);
-				//	}
-				//	else
-				//	{  
-				//		memberupdate.setSpouseBdate(null);
-				//	}
-					Set mdetails = new HashSet();
-					if(request.getParameter("frstrwfullname")!=null && request.getParameter("frstrwfullname")!=""){
-					String frstrwfullname = request.getParameter("frstrwfullname");
-					int frstrwage = Integer.parseInt(request.getParameter("frstrwage"));
-					String frstrwrelation = request.getParameter("frstrwrelation");
-					String frstrwgender = request.getParameter("frstrwgender");
-			    	date4 = (Date) formatter.parse(request.getParameter("frstrwdate"));
-					mdetails.add(new Memberfamily(frstrwage,frstrwrelation,frstrwgender,frstrwfullname,date4));
+					
+					date2 = (Date) formatter.parse(request.getParameter("member_birthdate"));
+					memberupdate.setBirthDate(date2);
+					
+					if(request.getParameter("spouse_birth_date")!=null && request.getParameter("spouse_birth_date")!=""){
+					date3 = (Date) formatter.parse(request.getParameter("spouse_birth_date"));
+					memberupdate.setSpouseBdate(date3);
 					}
-				if(request.getParameter("secondrwfullname")!=null && request.getParameter("secondrwfullname")!=""){
-					String secondrwfullname = request.getParameter("secondrwfullname");
-					int secondrwage = Integer.parseInt(request.getParameter("secondrwage"));
-					String secondrwrelation = request.getParameter("secondrwrelation");
-					String secondrwgender = request.getParameter("secondrwgender");
-			    	date4 = (Date) formatter.parse(request.getParameter("secondrwdate"));
-			    	mdetails.add(new Memberfamily(secondrwage,secondrwrelation,secondrwgender,secondrwfullname,date4));
-				}
-				if(request.getParameter("thirdrwfullname")!=null && request.getParameter("thirdrwfullname")!=""){
-					String thirdrwfullname = request.getParameter("thirdrwfullname");
-					int thirdrwage = Integer.parseInt(request.getParameter("thirdrwage"));
-					String thirdrwrelation = request.getParameter("thirdrwrelation");
-					String thirdrwgender = request.getParameter("thirdrwgender");
-			    	date4 = (Date) formatter.parse(request.getParameter("thirdtrwdate"));
-			    	mdetails.add(new Memberfamily(thirdrwage,thirdrwrelation,thirdrwgender,thirdrwfullname,date4));
-				}
-				if(request.getParameter("forthrwfullname")!=null && request.getParameter("forthrwfullname")!=""){
-					String forthrwfullname = request.getParameter("forthrwfullname");
-					int forthrwage = Integer.parseInt(request.getParameter("forthrwage"));
-					String forthrwrelation = request.getParameter("forthrwrelation");
-					String forthrwgender = request.getParameter("forthrwgender");
-			    	date4 = (Date) formatter.parse(request.getParameter("forthrwdate"));
-			    	mdetails.add(new Memberfamily(forthrwage,forthrwrelation,forthrwgender,forthrwfullname,date4));
-				}
-				memberupdate.setMdetails(mdetails);
+					else
+					{  
+						memberupdate.setSpouseBdate(null);
+					}
+					
+					if(request.getParameter("member_anniversary")!=null && request.getParameter("member_anniversary")!=""){
+						date1 = (Date) formatter.parse(request.getParameter("member_anniversary"));
+						memberupdate.setAnnivDate(date1);
+						}
+						else
+						{  
+							memberupdate.setAnnivDate(null);
+
+						}
+					
+					Set mdetails = new HashSet();
+					//Set fdetails=new HashSet();
+					if(request.getParameterValues("frstrwfullname")!=null )
+					{
+					String frstrwfullname[] = request.getParameterValues("frstrwfullname");
+					System.out.println("MemberFamily for the id:  are1: ");
+					String frstrwage[] = request.getParameterValues("frstrwage");
+					System.out.println("MemberFamily for the id:  are2: ");
+					String frstrwrelation[] = request.getParameterValues("frstrwrelation");
+					System.out.println("MemberFamily for the id:  are3: ");
+					String frstrwgender[] = request.getParameterValues("frstrwgender");
+					System.out.println("MemberFamily for the id:  are4: ");
+					String date44[] = request.getParameterValues("frstrwdate");
+			    	//date4 = (Date) formatter.parse(date44);
+					System.out.println("MemberFamily for the id:  are5: "+frstrwfullname.length);
+
+					for(int i=0;i<frstrwfullname.length;i++){
+						System.out.println("MemberFamily for the id:  are5: ");
+						String name=frstrwfullname[i];
+						System.out.println("MemberFamily for the id:  are6: ");
+						int age=Integer.parseInt(frstrwage[i]);
+						System.out.println("MemberFamily for the id:  are7: ");
+						String relation=frstrwrelation[i];
+						System.out.println("MemberFamily for the id:  are8: "+frstrwrelation[i]);
+						String gender=frstrwgender[i];
+						Date date=(Date)formatter.parse(date44[i]);
+						
+         				Query memberdel=session.createQuery("delete from Memberfamily m where m.memberId="+a2);
+         				int rowcount=memberdel.executeUpdate();
+						System.out.println("MemberFamily for the id:  are9: ");
+						mdetails.add(new Memberfamily(age, relation, gender, name, date));
+					}
+					System.out.println("MemberFamily for the id: "+a2+" are: "+mdetails);
+					memberupdate.setMdetails(mdetails);
 					session.update(memberupdate);
-					request.setAttribute("result", "DONE");
+					request.setAttribute("result", "DONE");	}			
 				}
-			
 				Query q = session.createQuery("Select m.memberId,m.memberCode,m.firstName,m.lastName from Member m");
 				List Custlist1 = q.list();
 				request.setAttribute("updatelist1", Custlist1);
@@ -440,10 +482,15 @@ public class CommonServlet extends HttpServlet {
 					
 					request.setAttribute("updatelist2", Custlist2);
 					System.out.println("sdfsewf1"+Custlist2);
+					
 				    Query q3 = session.createQuery("Select mf.mFamilyId,mf.Relation,mf.Gender,mf.Name,mf.DOB,mf.Age from Memberfamily mf where mf.memberId="+ r1);
 					List Custlist3 = q3.list();
 					request.setAttribute("updatelist3", Custlist3);
 				}
+				Query q1 = session.createQuery("Select m.memberId,m.memberCode,m.firstName,m.lastName from Member m");
+				List Custlist11 = q.list();
+				request.setAttribute("updatelist1", Custlist11);
+
 				tr.commit();
 				RequestDispatcher dispatcher1 = getServletContext().getRequestDispatcher("/updateMember.jsp");
 				dispatcher1.forward(request, response);
@@ -458,7 +505,10 @@ public class CommonServlet extends HttpServlet {
 					for (int i = 0; i < Check1.length; i++) {
 						si1 = Integer.valueOf(Check1[i]);
 						Member memberdel = (Member) session.get(Member.class,si1);
+						//strQuery=session.createQuery("Delete from Member m where m.memberId="+si1);
+						//int rowcount=strQuery.executeUpdate();
 						session.delete(memberdel);
+						
 						request.setAttribute("result", si1);
 					}
 				}
@@ -506,6 +556,58 @@ public class CommonServlet extends HttpServlet {
 				dispatcher = getServletContext().getRequestDispatcher("/deleteMember.jsp");
 				dispatcher.forward(request, response);
 			}
+			//card
+		else 
+			if(request.getParameter("cardradio")!=null && request.getParameter("cardradio")!=""){
+			if(request.getParameter("cardradio")=="Prepaid"){
+			tr = session.beginTransaction();
+			String cType=request.getParameter("cardradio");
+			System.out.println(request.getParameter("cardradio"));
+			int mCode=Integer.parseInt(request.getParameter("memberCode"));
+			String mName=request.getParameter("memberName");
+			String cardNo=request.getParameter("cardNumber");
+			double pamt=Double.parseDouble(request.getParameter("paidamount"));
+			double disc=Double.parseDouble(request.getParameter("discount"));
+			double cbal=Double.parseDouble(request.getParameter("cardbalance"));
+			
+			CardActivation cardActivation=new CardActivation();
+			cardActivation.setMemberCode(mCode);
+			cardActivation.setCardType(cType);
+			cardActivation.setCardNo(cardNo);
+			cardActivation.setPaidAmount(pamt);
+			cardActivation.setDiscount(disc);
+			
+			cardActivation.setCardBalance(cbal);
+			
+			session.save(cardActivation);
+			tr.commit();
+							
+			System.out.println("data inserted into DB.....");
+			
+			
+		}else{
+			System.out.println("else........");
+			tr = session.beginTransaction();
+			String cType=request.getParameter("cardradio");
+			System.out.println(request.getParameter("cardradio"));
+			int mCode=Integer.parseInt(request.getParameter("memberCode"));
+			String mName=request.getParameter("memberName");
+			String cardNo=request.getParameter("cardNumber");
+			double pamt=Double.parseDouble(request.getParameter("paidamount"));
+			double cbal=Double.parseDouble(request.getParameter("cardbalance"));
+			
+			CardActivation cardActivation=new CardActivation();
+			cardActivation.setMemberCode(mCode);
+			cardActivation.setCardType(cType);
+			cardActivation.setCardNo(cardNo);
+			cardActivation.setPaidAmount(pamt);
+			cardActivation.setCardBalance(cbal);
+			
+			session.save(cardActivation);
+			tr.commit();
+			
+		}
+		}
 			else if (request.getParameter("myname") != null
 					&& request.getParameter("myname").equals("searchpage")) {
 				String strOptVal = null;
@@ -645,6 +747,7 @@ public class CommonServlet extends HttpServlet {
 					dispatcher1.forward(request, response);
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
