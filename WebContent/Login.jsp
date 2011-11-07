@@ -9,7 +9,9 @@
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 
 <script type="text/javascript">
-	
+window.onload = function(){
+	document.frmlogin.username.focus();
+};
 	var alphaNumExp = /^[0-9a-zA-Z_ ]+$/;
 		function Validate()
 		{
@@ -33,6 +35,7 @@
 			{
 				alert("Invalid User");
 			}
+			document.frmlogin.username.focus();
 		}
 	</script>
 </head>

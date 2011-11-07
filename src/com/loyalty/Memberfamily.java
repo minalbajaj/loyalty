@@ -6,14 +6,14 @@ public class Memberfamily {
 
 	int mFamilyId,memberId,Age;
 	String Relation,Gender,Name;
-	Date DOB;
+	String DOB;
 	public Memberfamily() {
 		super();
 	}
 	
 	
 	public Memberfamily(int memberId, int age, String relation, String gender,
-			String name, Date dOB) {
+			String name, String dOB) {
 		super();
 		this.memberId = memberId;
 		Age = age;
@@ -24,7 +24,7 @@ public class Memberfamily {
 	}
 
 
-	public Memberfamily(int age, String relation, String gender, String name,Date dOB) {
+	public Memberfamily(int age, String relation, String gender, String name,String dOB) {
 		super();
 		Age = age;
 		Relation = relation;
@@ -70,12 +70,18 @@ public class Memberfamily {
 	public void setName(String name) {
 		Name = name;
 	}
-	public Date getDOB() {
+	
+	
+	public String getDOB() {
 		return DOB;
 	}
-	public void setDOB(Date dOB) {
+
+
+	public void setDOB(String dOB) {
 		DOB = dOB;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Memberfamily [mFamilyId=" + mFamilyId + ", memberId="

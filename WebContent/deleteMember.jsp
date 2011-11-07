@@ -88,18 +88,18 @@ function callPagination(iPageNo){
               <td>
                <div align="left" style="height:25px;" class="pageheading">Delete Member</div></td>
               <td align="right">
-                <table border="0" cellpadding="0" cellspacing="0">
+                <table border="0" cellpadding="0" cellspacing="0" style="margin-right:10px; color:#990000;">
                <tr>
               	<td valign="top">
 	              	              	</td>
-              	<td valign="top">
+              	<td>
               		<form name="updatecustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="Updatecustomer"></input>
               			<input type="submit" name="btnupdatecustomer" class="links" value="Update" style="border:none;background: none;" />
               			&nbsp;&nbsp;|&nbsp;
               		</form>              		
               	</td>
-              	<td valign="top">
+              	<td>
               		<form name="Deletecustomer" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="Deletecustomer"></input>
               			<input type="submit" name="btndeletecustomer" class="links" value="Delete" style="border:none;background: none;" />

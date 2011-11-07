@@ -108,7 +108,7 @@ function callPagination(iPageNo){
               			&nbsp;&nbsp;|&nbsp;
               		</form>              		
               	</td>
-              	<td valign="top">
+              	<td>
               		<form name="Deleteuser" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="DeleteUser"></input>
               			<input type="submit" name="btndeleteuser" class="links" value="Delete" style="border:none;background: none;" />

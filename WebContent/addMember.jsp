@@ -24,13 +24,8 @@ var passwordExp = /^[0-9a-zA-Z_]+$/;
 var phoneNumExp = /^[0-9()-+ ]+$/;
 function ShowNoBox(typeval){
 	if(typeval=='Married'){
-		
-		document.getElementById("textbox1").style.display='inline';
-		document.getElementById("textbox2").style.display='inline';
-		document.getElementById("textbox3").style.display='inline';
-		document.getElementById("weddingtextbox1").style.display='inline';
-	    document.getElementById("weddingtextbox2").style.display='inline';
-		document.getElementById("weddingtextbox3").style.display='inline';
+		document.getElementById("hidespouse").style.display='inline';
+		document.getElementById("hideweddindate").style.display='inline';
 		calendar2 = new Epoch('cal1','popup',document.getElementById('member_anniversary'),false);
 		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
 		calendar3 = new Epoch('cal1','popup',document.getElementById('secondrwdate'),false);
@@ -38,12 +33,8 @@ function ShowNoBox(typeval){
 		calendar3 = new Epoch('cal1','popup',document.getElementById('forthrwdate'),false);
         calendar3 = new Epoch('cal1','popup',document.getElementById('spouse_birth_date'),false);
 	}else{
-		document.getElementById("textbox1").style.display='none';
-		document.getElementById("textbox2").style.display='none';
-		document.getElementById("textbox3").style.display='none';
-		document.getElementById("weddingtextbox1").style.display='none';
-		document.getElementById("weddingtextbox2").style.display='none';
-		document.getElementById("weddingtextbox3").style.display='none';	
+		document.getElementById("hidespouse").style.display='none';
+		document.getElementById("hideweddindate").style.display='none';
 		calendar3 = new Epoch('cal1','popup',document.getElementById('frstrwdate'),false);
 		calendar3 = new Epoch('cal1','popup',document.getElementById('secondrwdate'),false);
 		calendar3 = new Epoch('cal1','popup',document.getElementById('thirdtrwdate'),false);
@@ -130,16 +121,19 @@ function Validate()
 	document.frmaddmember.member_status.focus();
 	return false;
     }
+	
 	if(document.frmaddmember.member_birthdate.value==""){
 		alert("Please enter member birthday.");
 		document.frmaddmember.member_birthdate.focus();
 		return false;
 	}
+
 	if(document.frmaddmember.member_anniversary.value=="" && document.getElementById('member_status').value=='Married'){
 		alert("Please enter member anniversary.");
 		document.frmaddmember.member_anniversary.focus();
 		return false;
 	}
+	
 	
 	if(document.getElementById('member_status').value=='Married' && document.frmaddmember.spouse_first_name.value==""){
 		alert("Please enter spouse first name.");
@@ -160,10 +154,107 @@ function Validate()
 		document.frmaddmember.spouse_birth_date.focus();
 		return false;
 	}
+	if (document.frmaddmember.member_status.value=="0" )
+	{
+	alert("Please select status.");
+	document.frmaddmember.member_status.focus();
+	return false;
+    }
+	//for member details
+	if(document.frmaddmember.frstrwfullname.value!=null && document.frmaddmember.frstrwfullname.value!=""){
+		if(document.frmaddmember.frstrwage.value==""){
+			alert("Please enter first member's age.");
+			document.frmaddmember.frstrwage.focus();
+			return false;
+		}
+		if(document.frmaddmember.frstrwdate.value==""){
+			alert("Please enter first member's birthdate.");
+			document.frmaddmember.frstrwdate.focus();
+			return false;
+		}if(document.frmaddmember.frstrwgender.value==""){
+			alert("Please enter first member's gender.");
+			document.frmaddmember.frstrwgender.focus();
+			return false;
+		}
+		if(document.frmaddmember.frstrwrelation.value==""){
+			alert("Please enter first member's relation.");
+			document.frmaddmember.frstrwrelation.focus();
+			return false;
+		}
+		
+	}
 	
+	if(document.frmaddmember.secondrwfullname.value!=null && document.frmaddmember.secondrwfullname.value!=""){
+		if(document.frmaddmember.secondrwage.value==""){
+			alert("Please enter second member's age.");
+			document.frmaddmember.secondrwage.focus();
+			return false;
+		}
+		if(document.frmaddmember.secondrwdate.value==""){
+			alert("Please enter second member's birthdate.");
+			document.frmaddmember.secondrwdate.focus();
+			return false;
+		}if(document.frmaddmember.secondrwgender.value==""){
+			alert("Please enter second member's gender.");
+			document.frmaddmember.secondrwgender.focus();
+			return false;
+		}
+		if(document.frmaddmember.secondrwrelation.value==""){
+			alert("Please enter second member's relation.");
+			document.frmaddmember.secondrwrelation.focus();
+			return false;
+		}
+		
+	}
 	
+	if(document.frmaddmember.thirdrwfullname.value!=null && document.frmaddmember.thirdrwfullname.value!=""){
+		if(document.frmaddmember.thirdrwage.value==""){
+			alert("Please enter third member's age.");
+			document.frmaddmember.thirdrwage.focus();
+			return false;
+		}
+		if(document.frmaddmember.thirdrwdate.value==""){
+			alert("Please enter third member's birthdate.");
+			document.frmaddmember.thirdrwdate.focus();
+			return false;
+		}if(document.frmaddmember.thirdrwgender.value==""){
+			alert("Please enter third member's gender.");
+			document.frmaddmember.thirdrwgender.focus();
+			return false;
+		}
+		if(document.frmaddmember.thirdrwrelation.value==""){
+			alert("Please enter third member's relation.");
+			document.frmaddmember.thirdrwrelation.focus();
+			return false;
+		}
+		
+	}
+	
+	if(document.frmaddmember.forthrwfullname.value!=null && document.frmaddmember.forthrwfullname.value!=""){
+		if(document.frmaddmember.forthrwage.value==""){
+			alert("Please enter fourth member's age.");
+			document.frmaddmember.forthrwage.focus();
+			return false;
+		}
+		if(document.frmaddmember.forthrwdate.value==""){
+			alert("Please enter fourth member's birthdate.");
+			document.frmaddmember.forthrwdate.focus();
+			return false;
+		}if(document.frmaddmember.forthrwgender.value==""){
+			alert("Please enter fourth member's gender.");
+			document.frmaddmember.forthrwgender.focus();
+			return false;
+		}
+		if(document.frmaddmember.forthrwrelation.value==""){
+			alert("Please enter fourth member's relation.");
+			document.frmaddmember.forthrwrelation.focus();
+			return false;
+		}
+		
+	}
+	/////////////////////////////////////////////////////////
+		
 	document.frmaddmember.submit();
-	OpenPopup();
 	return true;
 }
 </script>
@@ -181,7 +272,7 @@ function Validate()
 							<tr>
 				<td colspan="7" align="left">
 				
-				<table width="100%" border="0">
+				<table width="100%" border="0" align="left" cellspacing="0" cellpadding="0">
   <tr>
     <td colspan="7" align="left" valign="top">&nbsp;</td>
     </tr>
@@ -189,12 +280,12 @@ function Validate()
 						<td align="left" colspan="7">
 						<div align="left" style="height: 25px;" class="pageheading">Registration Form :						</div>						</td></tr>
                         <tr>
-    <td width="16%" align="left" valign="top">&nbsp;</td>
-    <td width="3%" align="center" valign="top">&nbsp;</td>
-    <td width="26%" align="left" valign="top">&nbsp;</td>
-    <td width="3%">&nbsp;</td>
+    <td width="17%" align="left" valign="top">&nbsp;</td>
+    <td width="4%" align="center" valign="top">&nbsp;</td>
+    <td width="24%" align="left" valign="top">&nbsp;</td>
+    <td width="3%" align="left" valign="top">&nbsp;</td>
     <td width="19%" align="left" valign="top">&nbsp;</td>
-    <td width="4%">&nbsp;</td>
+    <td width="4%" align="center" valign="top">&nbsp;</td>
     <td width="29%" align="left" valign="top">&nbsp;</td>
   </tr>
   <tr>
@@ -209,14 +300,14 @@ function Validate()
              <option value ="Ms" >Ms</option>
           </select>
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Member Code<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_code" id="member_code" style="width:175px"></td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
    <tr>
     <td align="left" valign="top">
@@ -225,14 +316,14 @@ function Validate()
     <td align="left" valign="top"><div align="left">
         <input type="text" name="first_name" id="first_name" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Last Name<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="last_name" id="last_name" style="width:175px"></td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
   </tr>
    <tr>
     <td align="left" valign="top">
@@ -241,14 +332,14 @@ function Validate()
     <td align="left" valign="top"><div align="left">
 						 <textarea name="member_address" id="member_address" style="height: 100px" ></textarea>
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">City<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_city" id="member_city" style="width:175px"></td>
   </tr>
   <tr>
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
   <tr>
     <td align="left" valign="top">
@@ -257,14 +348,14 @@ function Validate()
     <td align="left" valign="top"><div align="left">
         <input type="text" name="member_state" id="member_state" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Pin<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_pin" id="member_pin" style="width:175px"></td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
  <tr>
     <td align="left" valign="top">
@@ -273,13 +364,13 @@ function Validate()
     <td align="left" valign="top"><div align="left">
         <input type="text" name="member_email" id="member_email" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top"> </td>
     <td align="center" valign="top"></td>
     <td align="left" valign="top"> </td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
    <tr>
     <td align="left" valign="top">
@@ -288,14 +379,14 @@ function Validate()
     <td align="left" valign="top"><div align="left">
         <input type="text" name="member_phone" id="member_phone" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Mobile<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"> 	<input type="text" name="member_mobile" id="member_mobile" style="width:175px"></td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
  <tr>
     <td align="left" valign="top">
@@ -308,7 +399,7 @@ function Validate()
             <option value ="Female" >Female</option>
           </select>
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Marital Status<span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
@@ -321,7 +412,7 @@ function Validate()
     </div></td>
   </tr>
   <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
    <tr>
     <td align="left" valign="top">
@@ -332,52 +423,60 @@ function Validate()
 
   
         </div></td>
-    <td align="left" valign="top">&nbsp;</td>
-   <td align="left" valign="top" id="weddingtextbox1">
+    <td align="left" valign="top" >&nbsp;</td>
+   <td align="left" valign="top"  colspan="3">
+   <div id="hideweddindate">
+   <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+       <td width="37%" align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Wedding Anniversary<span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top" id="weddingtextbox2"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" id="weddingtextbox3"> 
+    <td width="8%" align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
+    <td width="55%" align="left" valign="top" > 
      <input type="text" readonly="readonly" name="member_anniversary" style="width:175px" id="member_anniversary" <% if(d1!=null){ %> value="<%= d1 %>" <% } %>>
-    	</td>
+    	</td>  </tr>
+</table></div>
+</td>
   </tr>
   
- <tr>
-    <td colspan="7">&nbsp;</td>
-    </tr>
-
-   
-   <tr id="textbox1" >
-     <td colspan="7" align="left" valign="top">
-     
-						<div align="left" style="height: 25px;" class="pageheading">Spouse Details :						</div></td>
+   <tr>
+     <td colspan="7" align="left">&nbsp;</td>
    </tr>
    <tr>
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">
+    <div id="hidespouse">
+    <table width="100%" border="0" align="left">
+     <tr  >
+     <td colspan="7" align="left" valign="top">
+     
+						<div align="left" style="height: 25px;" class="pageheading">Spouse Details :</div></td>
+   </tr>
+   <tr>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
-   <tr id="textbox2" >
-    <td align="left" valign="top" >
+   <tr >
+    <td width="18%" align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Spouse's First Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" ><div align="left">
+    <td width="3%" align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
+    <td width="24%" align="left" valign="top" ><div align="left">
         <input type="text" name="spouse_first_name" id="spouse_first_name" style="width:175px">
         </div></td>
-    <td >&nbsp;</td>
-    <td align="left" valign="top" >
+    <td width="4%" align="left" valign="top">&nbsp;</td>
+    <td width="23%" align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Spouse's Last Name <span style="color:#FF0000"> *</span></div>  </td>
-    <td align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" > 	<input type="text" name="spouse_last_name" id="spouse_last_name" style="width:175px"></td>
+    <td width="1%" align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
+    <td width="27%" align="left" valign="top" > 	<input type="text" name="spouse_last_name" id="spouse_last_name" style="width:175px"></td>
   </tr>
    <tr align="left" valign="top">
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left">&nbsp;</td>
     </tr>
-   <tr id="textbox3" >
+   <tr  >
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Spouse's Email <span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"><div align="left">
         <input type="text" name="spouse_email" id="spouse_email" style="width:175px">
         </div></td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Birth Date <span style="color:#FF0000"> *</span></div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
@@ -387,9 +486,14 @@ function Validate()
   
         </div></td>
   </tr>
+</table></div>
+</td>
+    </tr>
+
+   
  
    <tr>
-    <td colspan="7">&nbsp;</td>
+    <td colspan="7" align="left" valign="top">&nbsp;</td>
     </tr>
   <tr>
      <td colspan="7" align="left" valign="top">
@@ -397,8 +501,8 @@ function Validate()
    </tr>
   
    <tr>
-    <td colspan="7">  <div align="left" style="margin-left:10px;">
-     <table width="95%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #000000;">
+    <td colspan="7" align="left" valign="top">  <div align="left" style="margin-left:10px;">
+     <table width="98%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #000000;" align="left">
   <tr>
     <td width="20%" height="28px" style="border-right:1px solid #000000;background:#CCCCCC;"><div align="center"><strong><span class="style1">Full Name</span></strong></div></td>
     <td width="18%"  style="border-right:1px solid #000000; background:#CCCCCC;"><div align="center"><strong><span class="style1">Age</span></strong></div></td>
@@ -511,27 +615,27 @@ function Validate()
     </td>
     </tr>
    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
   </tr>
    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
+    <td align="left" valign="top">&nbsp;</td>
   </tr>
   <tr>
-						<td align="left">&nbsp;</td>
 						<td align="left" valign="top">&nbsp;</td>
-						<td align="left" colspan="5">
+						<td align="left" valign="top">&nbsp;</td>
+						<td colspan="5" align="left" valign="top">
 						<div align="left"><input type="button" name="save"
 							value="Preview" class="buttons" onclick="return Validate();"
 							style="width: 80px;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
@@ -548,3 +652,10 @@ function Validate()
 
 		</table>
 		<%@ include file="includes/footer.jsp"%>
+		
+<%if(request.getAttribute("result")!=null){
+	%>
+	<script type="text/javascript">
+	   alert("Member added successfully.");
+	   </script>
+	   <%} %>

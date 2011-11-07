@@ -54,7 +54,6 @@ function cancelAction()
 <% 
     String struserid=(String)request.getAttribute("struserid");  
 	List<?> userlist1=(List<?>)request.getAttribute("updatelist1");  
-	System.out.println(userlist1);
 	List<?> userlist2=null;
 	if(request.getAttribute("updatelist2")!=null){		
 		userlist2=(List<?>)request.getAttribute("updatelist2"); 
@@ -62,7 +61,8 @@ function cancelAction()
 %>
   <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
     <tr >
-      <td colspan="4"><table width="100%" height="23" border="0" align="left" cellpadding="0" cellspacing="0" style="border:0px solid #000000;">
+      <td colspan="4">
+      <table width="100%" height="23" border="0" align="left" cellpadding="0" cellspacing="0" style="border:0px solid #000000;">
           <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -70,7 +70,7 @@ function cancelAction()
           <tr>
               <td><div align="left" style="height:25px;" class="pageheading">Update User </div></td>
               <td align="right" valign="top">
-              <table border="0" cellpadding="0" cellspacing="0">
+              <table border="0" cellpadding="0" cellspacing="0" style="margin-right:10px; color:#990000;">
               <tr>
               	<td valign="top">
 	              	<form name="adduser" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
@@ -86,7 +86,7 @@ function cancelAction()
               			&nbsp;&nbsp;|&nbsp;
               		</form>              		
               	</td>
-              	<td valign="top">
+              	<td >
               		<form name="Deleteuser" action="CommonServlet" method="post" style="margin:0px 0px 0px 0px;">
               			<input type="hidden" name="myname" value="DeleteUser"></input>
               			<input type="submit" name="btndeleteuser" class="links" value="Delete" style="border:none;background: none;" />

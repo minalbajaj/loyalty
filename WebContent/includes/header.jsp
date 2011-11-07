@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>INWISE SYSTEM</title>
+<title>Customer loyalty</title>
 <link rel="stylesheet" type="text/css" href="sdmenu/sdmenu.css" />
 <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
 
@@ -70,16 +70,12 @@
     </tr>
 	<tr>
 		<td style="background:url(images/fadedBar.png) repeat-y; color:#ffffff;">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-		
-          </tr>
-        </table>        
+               
        </td>
 	</tr>
 	<tr>
 		<td colspan="2" width="15%" valign="top" align="center">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" >
 		<tr><td valign="top">
 			<% 
 				String myType= (String) session.getAttribute("mytype");
@@ -91,4 +87,4 @@
 			<%@ include file="usermenu.jsp" %>
 			<% } %>
 		</td>
-		<td width="85%" height="400" valign="top" align="center">
+		<td width="100%" height="400" valign="top" align="center">

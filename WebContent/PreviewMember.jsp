@@ -6,6 +6,12 @@
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.util.List" %>
+<script type="text/javascript">
+function redirectToEditMember(){
+	document.getElementById("hiddenEditId").value=document.getElementById("hiddenId").value;
+	document.frmeditmember.submit();
+}
+</script>
 <% String mytype= (String) session.getAttribute("mytype");
    if(mytype.equals("U"))
    {   
@@ -14,7 +20,7 @@
 %>
 <%  List<?> rsReceipt=(List<?>)request.getAttribute("updatelist2"); 
 List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
-  %>
+%>
 
 <link rel="stylesheet" type="text/css" href="css/epoch_styles.css" /> 
 	<script type="text/javascript" src="javascript/epoch_classes.js"></script> 
@@ -41,7 +47,13 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
 					</tr>
 				</table>				</td>
 			</tr>
-<form name="frmaddmember" method="post" action="cardActivation">
+<form action="CommonServlet" method="post" name="frmeditmember">
+
+
+<input type="hidden" name="hiddenEditId" id="hiddenEditId" value="" />
+<input type="hidden" name="myname" id="myname" value="EditMember" />
+</form>			
+<form name="frmaddmember" method="post" action="cardActivation.jsp">
 				<input type="hidden" name="myname" value="Addcustomer"></input>
 			<tr>
 				<td colspan="3" align="left">
@@ -55,8 +67,7 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
     <td width="19%">&nbsp;</td>
     <td width="2%">&nbsp;</td>
     <td width="32%">&nbsp;</td>
-  </tr>
-      <% 
+  </tr>      <% 
 		if(rsReceipt!=null && rsReceipt.size()>0){ 
 			Iterator<?> it21 = rsReceipt.iterator(); 
 	 		while(it21.hasNext()){ 
@@ -64,7 +75,21 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
 
 				   Integer z5=(Integer) rowData[0];
 
-		 		%>  
+
+		 		%> 
+		 	 
+		 	 
+		 	 <tr style="display: none;">
+		 	 <td>
+		 	 
+    <input type="hidden" name="hiddenId" id="hiddenId" value="<%= rowData[0] %>" />
+    
+    
+    <input type="hidden" name="hiddenCode" id="hiddenCode" value="<%= rowData[2] %>" />
+    <input type="hidden" name="hiddenFirstName" id="hiddenFirstName" value="<%= rowData[3] %>" />
+    <input type="hidden" name="hiddenLastName" id="hiddenLastName" value="<%= rowData[4] %>" /></td>
+		 	 </tr>
+		 	 
   <tr>
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Title</div>  </td>
@@ -112,7 +137,7 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
     </tr>
   <tr>
     <td align="left" valign="top">
-    <div align="left" style="margin-left:15px;" class="labels"></div>  </td>
+    <div align="left" style="margin-left:15px;" class="labels">State</div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
     <td align="left" valign="top"><%=rowData[7] %></td>
     <td>&nbsp;</td>
@@ -174,15 +199,9 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Birth Date</div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-      <% 
-					String sst = null,stt=null;
-						
-								sst = (rowData[14].toString()).substring(0,10);
-								stt = sst.substring(8,10)+"/"+sst.substring(5,7)+"/"+sst.substring(0,4);
-					%>
-	
+      
     <td align="left" valign="top"><div align="left">
-       <%=stt %>
+       <%=rowData[14] %>
 
   
         </div></td>
@@ -190,15 +209,9 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
    <td align="left" valign="top" >
     <div align="left" style="margin-left:15px;" class="labels">Wedding Anniversary</div>  </td>
     <td align="center" valign="top" ><div align="center" class="labels"><b>:</b></div></td>
-     <% String sst1 = null,stt1=null;
-         	 
-			
-			sst1 = (rowData[15].toString()).substring(0,10);
-			stt1 = sst1.substring(8,10)+"/"+sst1.substring(5,7)+"/"+sst1.substring(0,4);
-	 		
-%>
+     
 
-<td align="left" valign="top" ><%=stt1 %>
+<td align="left" valign="top" ><%=rowData[15] %>
     	</td>
   </tr>
   <%} else { %>
@@ -206,15 +219,9 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Birth Date</div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-      <% 
-					String sst = null,stt=null;
-						
-								sst = (rowData[14].toString()).substring(0,10);
-								stt = sst.substring(8,10)+"/"+sst.substring(5,7)+"/"+sst.substring(0,4);
-					%>
-	
+    
     <td align="left" valign="top"><div align="left">
-       <%=stt %>
+       <%=rowData[14] %>
 
   
         </div></td>
@@ -262,13 +269,8 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
     <td align="left" valign="top">
     <div align="left" style="margin-left:15px;" class="labels">Birth Date </div>  </td>
     <td align="center" valign="top"><div align="center" class="labels"><b>:</b></div></td>
-    <td align="left" valign="top" > <div align="left">  <% 
-					String sst2 = null,stt2=null;
-						
-								sst2 = (rowData[19].toString()).substring(0,10);
-								stt2 = sst2.substring(8,10)+"/"+sst2.substring(5,7)+"/"+sst2.substring(0,4);
-					%>
-    <%=stt2 %>  
+    <td align="left" valign="top" > <div align="left">  
+    <%=rowData[19] %>  
         </div></td>
   </tr>
  <%}} %>
@@ -317,13 +319,8 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
             <%=rowData1[5] %>         </div></div></td>
        <td style="border-top:1px solid #000000;border-right:1px solid #000000;">
          <div align="left" style="margin-left:4px;">  
-         <div align="right">   <% 
-					String sst3 = null,stt3=null;
-						
-								sst3 = (rowData1[4].toString()).substring(0,10);
-								stt3 = sst3.substring(8,10)+"/"+sst3.substring(5,7)+"/"+sst3.substring(0,4);
-					%>
-    <%=stt3 %>  
+         <div align="right">  
+    <%=rowData1[4] %>  
 
          </div></div></td>
        <td style="border-top:1px solid #000000;border-right:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
@@ -332,11 +329,11 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
          <td style="border-top:1px solid #000000;"><div align="left" style="margin-left:4px;">  <div align="right">  
              <%=rowData1[2] %>
               </div></div></td>
-      </tr>
+      </tr><%} %>
            </table>
 </div>
     </td>
-    </tr> <%} }%>
+    </tr> <%} %>
     
    <tr>
     <td>&nbsp;</td>
@@ -363,7 +360,7 @@ List<?> rsReceipt1=(List<?>)request.getAttribute("updatelist3");
 						<div align="left"><input type="submit" name="save"
 							value="Submit" class="buttons" onClick="return Validate();"
 							style="width: 80px;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-							type="button" name="set" value="Edit" class="buttons" style="width: 80px;" />
+							type="button" name="set" value="Edit" class="buttons" onclick="redirectToEditMember()" style="width: 80px;" />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						 <a href="Search.jsp" onClick="javascript:cancelAction();"><input type="button" value="Cancel" class="buttons" style="width: 80px;">
 						</a></div></td>

@@ -1,32 +1,25 @@
 package com.loyalty;
 
+import java.util.Date;
+
 public class CardActivation {
-	int cardId;
-	int memberCode;
-	String cardType;
-	String memberName;
-	String cardNo;
-	double paidAmount;
-	double discount;
-	double cardBalance;
+	private int cardId;
+	private int memberId;
+	private String cardType;
+	private String cardNo;
+	private double paidAmount;
+	private double discount;
+	private double cardBalance;
+	private Date activationDate;
+	
+	private Date expiryDate;
+	private String cardStatus;
+	private double points;
+	private int visits;
 	
 	public CardActivation() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public CardActivation(int cardId, int memberCode, String cardType,
-			String memberName, String cardNo, double paidAmount,
-			double discount, double cardBalance) {
-		super();
-		this.cardId = cardId;
-		this.memberCode = memberCode;
-		this.cardType = cardType;
-		this.memberName = memberName;
-		this.cardNo = cardNo;
-		this.paidAmount = paidAmount;
-		this.discount = discount;
-		this.cardBalance = cardBalance;
 	}
 
 	public int getCardId() {
@@ -37,12 +30,13 @@ public class CardActivation {
 		this.cardId = cardId;
 	}
 
-	public int getMemberCode() {
-		return memberCode;
+	
+	public int getMemberId() {
+		return memberId;
 	}
 
-	public void setMemberCode(int memberCode) {
-		this.memberCode = memberCode;
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getCardType() {
@@ -53,14 +47,7 @@ public class CardActivation {
 		this.cardType = cardType;
 	}
 
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-
+	
 	public String getCardNo() {
 		return cardNo;
 	}
@@ -93,13 +80,55 @@ public class CardActivation {
 		this.cardBalance = cardBalance;
 	}
 
+	public Date getActivationDate() {
+		return activationDate;
+	}
+
+	public void setActivationDate(Date activationDate) {
+		this.activationDate = activationDate;
+	}
+
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public String getCardStatus() {
+		return cardStatus;
+	}
+
+	public void setCardStatus(String cardStatus) {
+		this.cardStatus = cardStatus;
+	}
+
+	public double getPoints() {
+		return points;
+	}
+
+	public void setPoints(double points) {
+		this.points = points;
+	}
+
+	public int getVisits() {
+		return visits;
+	}
+
+	public void setVisits(int visits) {
+		this.visits = visits;
+	}
+
 	@Override
 	public String toString() {
 		return "CardActivation [cardId=" + cardId + ", memberCode="
-				+ memberCode + ", cardType=" + cardType + ", memberName="
-				+ memberName + ", cardNo=" + cardNo + ", paidAmount="
+				+ memberId + ", cardType=" + cardType  + ", cardNo=" + cardNo + ", paidAmount="
 				+ paidAmount + ", discount=" + discount + ", cardBalance="
-				+ cardBalance + "]";
+				+ cardBalance + ", activationDate=" + activationDate
+				+ ", expiryDate=" + expiryDate + ", cardStatus=" + cardStatus
+				+ ", points=" + points + ", visits=" + visits + "]";
 	}
+
 	
 }

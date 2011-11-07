@@ -60,11 +60,70 @@
 		<id name="cardId" type="int" column="cardId">
 			<generator class="increment" />
 		</id>
-		<property name="memberCode" type="int" column="memberId" />
+		<property name="memberId" type="int" column="memberId" />
 		<property name="cardType"  column="cardType" />
 		<property name="cardNo"  column="cardNo" />
 		<property name="paidAmount" type="double" column="paidAmount" />
 		<property name="discount" type="double" column="discount" />
 		<property name="cardBalance" type="double" column="cardBalance" />
+		<property name="activationDate" column="activationDate" />
+		<property name="expiryDate" column="expiryDate" />
+		<property name="cardStatus" type="string" column="cardStatus" />
+		<property name="points"  column="Points" />
+		<property name="visits" type="int" column="Visits" />
+		
+		
 	</class>
-	</hibernate-mapping>
+	
+				<class name="com.loyalty.Email" table="email">
+		<id name="emailId" type="int" column="emailId">
+			<generator class="increment" />
+		</id>
+		<property name="email" column="email" />
+		<property name="password" column="password" />
+	</class>
+
+	<class name="com.loyalty.Points" table="points">
+		<id name="pointId" type="int" column="pointId">
+			<generator class="increment" />
+		</id>
+		<property name="points" column="points" />
+		<property name="pointAmount" column="pointAmount" />
+	</class>
+
+	<class name="com.loyalty.Discount" table="discount">
+		<id name="discountId" type="int" column="discountId">
+			<generator class="increment" />
+		</id>
+		<property name="minRecharge" column="minrecharge" />
+		<property name="discount" column="rechargebenifit" />
+	</class>
+
+	<class name="com.loyalty.Offer_Prepaid" table="offer_prepaid">
+		<id name="offerId" type="int" column="offerId">
+			<generator class="increment" />
+		</id>
+		<property name="fromDate" column="fromDate" />
+		<property name="toDate" column="toDate" />
+		<property name="discount" column="discount" />
+	</class>
+
+	<class name="com.loyalty.Offer_Postpaid" table="offer_postpaid">
+		<id name="postpaidOfferId" type="int" column="postpaidOfferId">
+			<generator class="increment" />
+		</id>
+		<property name="timeFrom" column="timeFrom" />
+		<property name="timeTo" column="timeTo" />
+		<set name="day" cascade="all">
+			<key column="dayId"></key>
+			<one-to-many class="com.loyalty.Day"></one-to-many>
+		</set>
+	</class>
+
+	<class name="com.loyalty.Day" table="day">
+		<id name="dayId" type="int" column="dayId">
+			<generator class="increment" />
+		</id>
+		<property name="day" column="day" />
+	</class>	
+</hibernate-mapping>

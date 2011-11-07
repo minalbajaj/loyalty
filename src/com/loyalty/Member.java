@@ -7,7 +7,7 @@ public class Member {
     int memberId;
     String pin,phone,mobile,memberCode;
     String title,firstName,lastName,address,city,state,email,gender,maritalStatus,spouseFname,spouseLname,spouseEmail;
-    Date birthDate,annivDate,spouseBdate;
+    String birthDate,annivDate,spouseBdate;
     Set mdetails;
     
     
@@ -22,23 +22,7 @@ public class Member {
         this.address = address;
     }
 
-    public Date getAnnivDate() {
-        return annivDate;
-    }
-
-    public void setAnnivDate(Date annivDate) {
-        this.annivDate = annivDate;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getCity() {
+       public String getCity() {
         return city;
     }
 
@@ -118,14 +102,7 @@ public class Member {
         this.pin = pin;
     }
 
-    public Date getSpouseBdate() {
-        return spouseBdate;
-    }
-
-    public void setSpouseBdate(Date spouseBdate) {
-        this.spouseBdate = spouseBdate;
-    }
-
+   
     public String getSpouseEmail() {
         return spouseEmail;
     }
@@ -183,6 +160,31 @@ public class Member {
 
 	public void setMemberCode(String memberCode) {
 		this.memberCode = memberCode;
+	}
+	
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getAnnivDate() {
+		return annivDate;
+	}
+
+	public void setAnnivDate(String annivDate) {
+		this.annivDate = annivDate;
+	}
+
+	public String getSpouseBdate() {
+		return spouseBdate;
+	}
+
+	public void setSpouseBdate(String spouseBdate) {
+		this.spouseBdate = spouseBdate;
 	}
 
 	@Override
